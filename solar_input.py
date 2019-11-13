@@ -48,13 +48,13 @@ def parse_star_parameters(line, star):
     **star** — объект звезды.
     """
     parametres = line.split()
-    star.R = parametres[1]
-    star.color = parametres[2]
-    star.m = parametres[3]
-    star.x = parametres[4]
-    star.y = parametres[5]
-    star.Vx = parametres[6]
-    star.Vy = parametres[7]
+    star.R = int(parametres[1])
+    star.color = int(parametres[2])
+    star.m = int(parametres[3])
+    star.x = int(parametres[4])
+    star.y = int(parametres[5])
+    star.Vx = int(parametres[6])
+    star.Vy = int(parametres[7])
 
 def parse_planet_parameters(line, planet):
     """Считывает данные о планете из строки.
@@ -72,13 +72,13 @@ def parse_planet_parameters(line, planet):
     **planet** — объект планеты.
     """
     parametres = line.split()
-    planet.R = parametres[1]
-    planet.color = parametres[2]
-    planet.m = parametres[3]
-    planet.x = parametres[4]
-    planet.y = parametres[5]
-    planet.Vx = parametres[6]
-    planet.Vy = parametres[7]
+    planet.R = int(parametres[1])
+    planet.color = int(parametres[2])
+    planet.m = int(parametres[3])
+    planet.x = int(parametres[4])
+    planet.y = int(parametres[5])
+    planet.Vx = int(parametres[6])
+    planet.Vy = int(parametres[7])
 
 def write_space_objects_data_to_file(output_filename, space_objects):
     """Сохраняет данные о космических объектах в файл.
