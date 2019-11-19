@@ -48,13 +48,13 @@ def parse_star_parameters(line, star):
     **star** — объект звезды.
     """
     parametres = line.split()
-    star.R = int(parametres[1])
-    star.color = int(parametres[2])
-    star.m = int(parametres[3])
-    star.x = int(parametres[4])
-    star.y = int(parametres[5])
-    star.Vx = int(parametres[6])
-    star.Vy = int(parametres[7])
+    star.R = float(parametres[1])
+    star.color = str(parametres[2])
+    star.m = float(parametres[3])
+    star.x = float(parametres[4])
+    star.y = float(parametres[5])
+    star.Vx = float(parametres[6])
+    star.Vy = float(parametres[7])
 
 def parse_planet_parameters(line, planet):
     """Считывает данные о планете из строки.
@@ -72,13 +72,13 @@ def parse_planet_parameters(line, planet):
     **planet** — объект планеты.
     """
     parametres = line.split()
-    planet.R = int(parametres[1])
-    planet.color = int(parametres[2])
-    planet.m = int(parametres[3])
-    planet.x = int(parametres[4])
-    planet.y = int(parametres[5])
-    planet.Vx = int(parametres[6])
-    planet.Vy = int(parametres[7])
+    planet.R = float(parametres[1])
+    planet.color = str(parametres[2])
+    planet.m = float(parametres[3])
+    planet.x = float(parametres[4])
+    planet.y = float(parametres[5])
+    planet.Vx = float(parametres[6])
+    planet.Vy = float(parametres[7])
 
 def write_space_objects_data_to_file(output_filename, space_objects):
     """Сохраняет данные о космических объектах в файл.
@@ -93,7 +93,8 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     """
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            print(out_file, "%s %d %s %f" % ('1', 2, '3', 4.5))
+            print(out_file, "%s %f %f %f %f %f %f" % (space_objects[0], space_objects[1], space_objects[2], space_objects[3], 
+            space_objects[4], space_objects[5], space_objects[6]))
             # FIXME: should store real values
 
 # FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
