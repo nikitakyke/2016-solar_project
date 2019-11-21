@@ -1,6 +1,5 @@
 # coding: utf-8
 # license: GPLv3
-
 from solar_objects import Star, Planet
 
 
@@ -83,13 +82,19 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     """
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            print(out_file, "%s %f %s %f %f %f %f %f" % (obj.type, obj.R, obj.color, obj.m, obj.x, obj.y, obj.Vx, obj.Vy))
+            print(out_file, "%s %f %s %f %f %f %f %f" % (obj.type, obj.R, obj.color, obj.m, obj.x, obj.y, obj.Vx, obj.Vy), file = out_file)
 
-# FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
-#def statistics:
+def statistics(space_objects, physical_time):
     """Сохраняет статистику в файл stats.py.
-    Формат: t Vx Vy x y"""
- 
+    Формат: t x y Vx Vy
+    Для заполнения файла stats.py данными используется with с'a', а не 'w', так как он их добавляет, а не перезаписывает"""
+    with open('stats.txt', 'a') as stats_file:
+        if physical_time == 0:
+            open('stats.txt', 'w').close()
+            print("time x_coord y_coord Vx_velocity Vy_velocity", file= stats_file)
+        for obj in space_objects:
+            if obj.type == "planet":
+                print("%.0f %.1f %.1f %.1f %.1f" % (physical_time, obj.x, obj.y, obj.Vx, obj.Vy), file = stats_file)
 
 if __name__ == "__main__":
     print("This module is not for direct call!")
