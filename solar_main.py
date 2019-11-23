@@ -2,7 +2,7 @@
 # license: GPLv3
 
 import tkinter
-import graph
+import solar_graph as graph #модуль, отвечающий за построение графиков
 from tkinter.filedialog import *
 from solar_vis import *
 from solar_model import *
