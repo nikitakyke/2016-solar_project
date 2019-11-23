@@ -2,6 +2,7 @@
 # license: GPLv3
 
 import tkinter
+import graph
 from tkinter.filedialog import *
 from solar_vis import *
 from solar_model import *
@@ -25,7 +26,6 @@ time_step = None
 space_objects = []
 """Список космических объектов."""
 
-
 def execution():
     """Функция исполнения -- выполняется циклически, вызывая обработку всех небесных тел,
     а также обновляя их положение на экране.
@@ -37,7 +37,7 @@ def execution():
     recalculate_space_objects_positions(space_objects, time_step.get())
     for body in space_objects:
         update_object_position(space, body)
-        
+
     #Вызывает функкцию, сохраняющую статистику в файл
     statistics(space_objects, physical_time)
 
@@ -115,9 +115,8 @@ def main():
     global time_speed
     global space
     global start_button
-
-    print('Modelling started!')
-    physical_time = 0
+    global graph_button
+    global frame
 
     root = tkinter.Tk()
     # космическое пространство отображается на холсте типа Canvas
@@ -126,6 +125,9 @@ def main():
     # нижняя панель с кнопками
     frame = tkinter.Frame(root)
     frame.pack(side=tkinter.BOTTOM)
+
+    print('Modelling started!')
+    physical_time = 0
 
     start_button = tkinter.Button(frame, text="Start", command=start_execution, width=6)
     start_button.pack(side=tkinter.LEFT)
@@ -149,8 +151,23 @@ def main():
     time_label = tkinter.Label(frame, textvariable=displayed_time, width=30)
     time_label.pack(side=tkinter.RIGHT)
 
+    #кнопка, после нажатия на которую можно построить график
+    graph_button = tkinter.Button(frame, text="Graph", command=Creating_Buttons, width=6)
+    graph_button.pack(side=tkinter.RIGHT)
+
     root.mainloop()
     print('Modelling finished!')
+
+#функция, отвечающая за создание 3 новых кнопок и удаления старой
+def Creating_Buttons():
+    global graph_button
+    graph_button.destroy()
+    Vr_button = tkinter.Button(frame, text="V(r)", command=graph.graph_Vr, width=6)
+    Vr_button.pack(side=tkinter.RIGHT)
+    rt_button = tkinter.Button(frame, text="r(t)", command=graph.graph_rt, width=6)
+    rt_button.pack(side=tkinter.RIGHT)
+    Vt_button = tkinter.Button(frame, text="V(t)", command=graph.graph_Vt, width=6)
+    Vt_button.pack(side=tkinter.RIGHT)
 
 if __name__ == "__main__":
     main()
