@@ -22,7 +22,7 @@ def plot_v_t():
     ax.grid()
     fig.savefig("test.png")
     plt.tight_layout()
-plot_v_t()
+    plot_v_t()
 
 def plot_r_t():
     f = open('stats.txt', 'r')
@@ -46,7 +46,7 @@ def plot_r_t():
     ax.grid()
     fig.savefig("test.png")
     plt.tight_layout()
-plot_r_t()
+    plot_r_t()
 
 def plot_v_r():
     f = open('stats.txt', 'r')
@@ -73,4 +73,4 @@ def plot_v_r():
     ax.grid()
     fig.savefig("test.png")
     plt.tight_layout()
-plot_v_r()
+    plot_v_r()
