@@ -1,76 +1,85 @@
-import matplotlib as mpl
 import matplotlib.pyplot as plt
-def plot_v_t():
-    f = open('stats.txt', 'r')
-    i=0
-    x =[]
-    y = []
-    for line in f:
-        if i == 1 :
-            vx = float(line.split()[3])
-            vy = float(line.split()[4])
-            v = (vx**2+vy**2)**0.5
-            y.append(v)
-            x.append(float(line.split()[0]))
-        i = 1
-    fig, ax = plt.subplots()
-    ax.plot(x,  y)      
-    ax.set(xlabel='time (s)', ylabel='velocity (м/с)',
-       title='v (t)')
-    ax.locator_params(tight=True, axis = 'x', nbins=10)
-    ax.locator_params(tight=True, axis = 'y', nbins=10)
-    ax.grid()
-    fig.savefig("test.png")
-    plt.tight_layout()
-    plot_v_t()
 
-def plot_r_t():
-    f = open('stats.txt', 'r')
-    i=0
-    x =[]
-    y = []
-    for line in f:
-        if i == 1 :
-            d_x = float(line.split()[1])
-            d_y = float(line.split()[2])
-            r = (d_x**2+d_y**2)**0.5
-            y.append(r)
-            x.append(float(line.split()[0]))
-        i = 1
-    fig, ax = plt.subplots()
-    ax.plot(x,  y)      
-    ax.set(xlabel='time (c)', ylabel='distance (м)',
-       title='r (t)')
-    ax.locator_params(tight=True, axis = 'x', nbins=10)
-    ax.locator_params(tight=True, axis = 'y', nbins=10)
-    ax.grid()
-    fig.savefig("test.png")
-    plt.tight_layout()
-    plot_r_t()
+def graph_Vt():
+    t = []  # массив с временем
+    V = []  # массив с полной скоростью
+    i = 0   #параметр, c использованием которого пропускается первая строка
+    #Заполнение массива данными из файла stats.txt для построения графика V(t)
+    with open('stats.txt') as stats_file:
+        for line in stats_file:
+            if i == 1:
+                vx = float(line.split()[3])
+                vy = float(line.split()[4])
+                v = (vx ** 2 + vy ** 2) ** 0.5
+                V.append(v)
+                t.append(float(line.split()[0]))
+            i = 1
+    #график
+    plt.scatter(t, V, s=10, c='red', marker='^')
 
-def plot_v_r():
-    f = open('stats.txt', 'r')
-    i=0
-    x =[]
-    y = []
-    for line in f:
-        if i == 1 :
-            vx = float(line.split()[3])
-            vy = float(line.split()[4])
-            d_x = float(line.split()[1])
-            d_y = float(line.split()[2])
-            v = (vx**2+vy**2)**0.5
-            r = (d_x**2+d_y**2)**0.5
-            y.append(v)
-            x.append(r)
-        i = 1
-    fig, ax = plt.subplots()
-    ax.plot(x,  y)      
-    ax.set(xlabel='distance (м)', ylabel='velocity (м/c)',
-       title='r (t)')
-    ax.locator_params(tight=True, axis = 'x', nbins=10)
-    ax.locator_params(tight=True, axis = 'y', nbins=10)
-    ax.grid()
-    fig.savefig("test.png")
-    plt.tight_layout()
-    plot_v_r()
+    #Заголовок графика
+    plt.title('Зависимость модуля скорости планеты от времени')
+
+    #Заголовок осей
+    plt.ylabel('Модуль скорости планеты, м/с')
+    plt.xlabel('Время, с')
+
+    #Показать график
+    plt.show()
+
+def graph_rt():
+    t = []  # массив с временем
+    r = []  # массив с расстоянием
+    i = 0  # параметр, c использованием которого пропускается первая строка
+    # Заполнение массива данными из файла stats.txt для построения графика r(t)
+    with open('stats.txt') as stats_file:
+        for line in stats_file:
+            if i == 1:
+                x = float(line.split()[1])
+                y = float(line.split()[2])
+                R = (x ** 2 + y ** 2) ** 0.5
+                r.append(R)
+                t.append(float(line.split()[0]))
+            i = 1
+    #график
+    plt.scatter(t, r, s=10, c='blue', marker='^')
+
+    #Заголовок графика
+    plt.title('Зависимость расстояния спутника до звезды от времени')
+
+    #Заголовок осей
+    plt.ylabel('Расстояние спутника до звезды, м')
+    plt.xlabel('Время, с')
+
+    # Показать график
+    plt.show()
+
+def graph_Vr():
+    r = []  # массив с расстоянием
+    V = []  # массив с полной скоростью
+    i = 0  # параметр, c использованием которого пропускается первая строка
+    # Заполнение массива данными из файла stats.txt для построения графика V(r)
+    with open('stats.txt') as stats_file:
+        for line in stats_file:
+            if i == 1:
+                vx = float(line.split()[3])
+                vy = float(line.split()[4])
+                v = (vx ** 2 + vy ** 2) ** 0.5
+                V.append(v)
+                x = float(line.split()[1])
+                y = float(line.split()[2])
+                R = (x ** 2 + y ** 2) ** 0.5
+                r.append(R)
+            i = 1
+    # график
+    plt.scatter(r, V, s=10, c='green', marker='^')
+
+    # add title
+    plt.title('Зависимость модуля скорости от расстояния до звезды')
+
+    # add x and y labels
+    plt.xlabel('Расстояние спутника до звезды, м')
+    plt.ylabel('Модуль скорости планеты, м/с')
+
+    # Показать график
+    plt.show()
